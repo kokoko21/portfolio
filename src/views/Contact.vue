@@ -76,9 +76,9 @@
 </template>
 
 <script>
-  import { validationMixin } from 'vuelidate'
-  import { required, maxLength, email } from 'vuelidate/lib/validators'
-  import { functions } from '@/plugins/firebase'
+  // import { validationMixin } from 'vuelidate'
+  // import { required, maxLength, email } from 'vuelidate/lib/validators'
+  // import { functions } from '@/plugins/firebase'
 
   export default {
     name: 'Contact',
