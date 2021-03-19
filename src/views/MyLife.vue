@@ -1,79 +1,7 @@
 <template>
   <v-main class="grey lighten-3">
     <v-container>
-      <v-sheet
-        min-height="80vh"
-        rounded="lg"
-        class="contact"
-      >
-        <v-img
-          height="250"
-          src="../assets/image/form.jpg"
-          class="form"
-        >
-          お問い合わせフォーム
-        </v-img>
-        <v-form>
-          <v-text-field
-            v-model="contactForm.name"
-            :error-messages="nameErrors"
-            :counter="20"
-            label="Name"
-            id="name"
-            required
-            @input="$v.name.$touch()"
-            @blur="$v.name.$touch()"
-          ></v-text-field>
-          <v-text-field
-            v-model="contactForm.email"
-            :error-messages="emailErrors"
-            label="E-mail"
-            id="mail"
-            required
-            @input="$v.email.$touch()"
-            @blur="$v.email.$touch()"
-          ></v-text-field>
-          <v-textarea
-          v-model="contactForm.text"
-          :error-messages="textErrors"
-          required
-          solo
-          name="input-7-4"
-          label="お問い合わせ内容を記入してください。"
-          id="content"
-          @change="$v.text.$touch()"
-          @blur="$v.text.$touch()"
-        ></v-textarea>
-          <v-checkbox
-            v-model="contactForm.checkbox"
-            :error-messages="checkboxErrors"
-            label="Do you agree?"
-            required
-            @change="$v.checkbox.$touch()"
-            @blur="$v.checkbox.$touch()"
-          ></v-checkbox>
 
-          <v-btn
-            class="mr-4"
-            @click="submit"
-          >
-            submit
-          </v-btn>
-          <v-btn @click="clear">
-            clear
-          </v-btn>
-        </v-form>
-      </v-sheet>
-      <v-snackbar
-        v-model="snackBar.show"
-        :color="snackBar.color"
-        bottom
-        right
-        :timeout="6000"
-        class="font-weight-bold"
-      >
-        {{snackBar.message}}
-      </v-snackbar>
     </v-container>
   </v-main>
 </template>
