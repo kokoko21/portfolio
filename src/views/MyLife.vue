@@ -1,106 +1,106 @@
 <template>
   <v-main class="grey lighten-3">
-    <v-container>
-
+    <h1>About me</h1>
+    <v-container py-6 px-5>
+      <v-row  justify="center" align-content="center">
+        <v-col>
+          <v-avatar
+            color="grey darken-1"
+            size="220"
+          >k</v-avatar>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <span class="display-1 font-weight-bold mb-1">{{name}}</span>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <p>{{hobby}}</p>
+          <p>{{me}}</p>
+        </v-col>
+      </v-row>
+      <v-spacer></v-spacer>
+      <div class="my-10">
+      <h2 class="mb-5">Time Line</h2>
+      <v-row>
+        <v-col>
+          <v-timeline>
+            <v-timeline-item
+              v-for="job in jobs"
+              :key="job"
+              color="indigo"
+              large
+            >
+              <template v-slot:opposite>
+                <span>{{job.year}}</span>
+              </template>
+              <v-card class="elevation-2">
+                <v-card-title class="headline">
+                  {{job.affiliation}}
+                </v-card-title>
+                <v-card-text>
+                  {{job.text}}
+                </v-card-text>
+              </v-card>
+            </v-timeline-item>
+          </v-timeline>
+        </v-col>
+      </v-row>
+      </div>
+      <v-row
+        aligin="center"
+        justify="space-around">
+        <v-icon
+          left
+          class="fab fa-twitter"
+          size="120px">
+        </v-icon>
+        <v-icon
+          left
+          class="fab fa-facebook"
+          size="120px">
+        </v-icon>
+        <v-icon
+          left
+          class="fab fa-github"
+          size="120px">
+        </v-icon>
+      </v-row>
     </v-container>
   </v-main>
 </template>
 
 <script>
-  import { validationMixin } from 'vuelidate'
-  import { required, maxLength, email } from 'vuelidate/lib/validators'
-  import axios from '../plugins/setting';
-
   export default {
-    name: 'Contact',
-
-    mixins: [validationMixin],
-
-    validations: {
-      name: { required, maxLength: maxLength(20) },
-      email: { required, email },
-      text: { required },
-      checkbox: {
-        checked (val) {
-          return val
-        },
-      },
-    },
-
-    data: () => ({
-      contactForm: {
-        name: '',
-        email: '',
-        select: null,
-        text: '',
-        checkbox: false,
-      },
-      snackBar: {
-        show: false,
-        color: '',
-        message: ''
+    data() {
+      return {
+        name: "KazushiTakagaki",
+        hobby: "趣味：フットサル、ゴルフ、スノーボード、読書",
+        me: "普段監視業務をしながら、開発エンジニアになるために日々、学習中です。",
+        jobs: [
+          {
+            year: "2013 ~ 2017",
+            affiliation: "同志社大学　商業部",
+            text: "大学では経営学を中心に学んでいました。"
+          },
+          {
+            year: "2017 ~ 2019",
+            affiliation: "営業",
+            text: "建築資材のメーカーでルート営業をしていました。"
+          },
+          {
+            year: "2019 ~",
+            affiliation: "監視業務",
+            text: "監視業務の合間に業務効率化のツール等を作成しています。"
+          },
+        ]
       }
-    }),
-
-    computed: {
-      checkboxErrors () {
-        const errors = []
-        if (!this.$v.checkbox.$dirty) return errors
-        !this.$v.checkbox.checked && errors.push('You must agree to continue!')
-        return errors
-      },
-      textErrors () {
-        const errors = []
-        if (!this.$v.text.$dirty) return errors
-        !this.$v.text.required && errors.push('お問い合わせ内容を入力してください')
-        return errors
-      },
-      nameErrors () {
-        const errors = []
-        if (!this.$v.name.$dirty) return errors
-        !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
-        !this.$v.name.required && errors.push('名前を入力してください。')
-        return errors
-      },
-      emailErrors () {
-        const errors = []
-        if (!this.$v.email.$dirty) return errors
-        !this.$v.email.email && errors.push('Must be valid e-mail')
-        !this.$v.email.required && errors.push('メールアドレスを入力してください。')
-        return errors
-      },
-    },
-
-    methods: {
-      submit: async function() {
-        this.$v.$touch()
-        var Nam = "entry.2005620554" + "=" + document.getElementById("name").value;
-        var Mai = "entry.1045781291" + "=" + document.getElementById("mail").value;
-        var Con = "entry.839337160" + "=" + document.getElementById("content").value;
-        var url =
-          "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdvZpCjWPV9nxzTHDcTjJVdhy6_75-KJHiIpviANL8nPVyU-A/formResponse?" +
-          Nam +
-          "&" +
-          Mai +
-          "&" +
-          Con;
-        axios.get(url);
-      },
-      clear () {
-        this.$v.$reset()
-        this.name = ''
-        this.email = ''
-        this.text = null
-        this.checkbox = false
-      },
-    },
+    }
   }
 </script>
 
 <style>
-  .form {
-    font-size: 50px;
-    text-align: center;
-    padding-top: 100px;
-  }
+  
 </style>
